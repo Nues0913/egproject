@@ -1,4 +1,5 @@
 import os
+import sys
 import time
 import random
 import openpyxl as op
@@ -7,7 +8,10 @@ wb = op.Workbook()
 wb.save('test.xlsx')
 '''
 
-eg_data = op.load_workbook(filename='en.xlsx')
+path = sys.path[0]
+path += '\en.xlsx'  #路徑引導
+#print(path)
+eg_data = op.load_workbook(path)
 #sheet name: 最近遇到 疑難雜症 lv3~4特選
 def sheet_1():
     sheet1 = eg_data['疑難雜症']
@@ -30,3 +34,20 @@ for i in range(len(voca)):
     test_voca[voca[i]] = chinese[i]
 #print(test_voca)
 
+
+def intro():
+    sys.stdout.write('loading')
+    for i in range(4):
+        time.sleep(1)
+        sys.stdout.write('.')
+    time.sleep(1)
+    os.system('cls')
+    
+for i in range(3):
+    intro()
+
+os.system('cls')
+
+def body():
+    print('input tests number')
+    t_number = int(input())
