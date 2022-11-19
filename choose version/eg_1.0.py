@@ -111,7 +111,7 @@ if ttype == '1':
         time.sleep(1)
         os.system('cls')
 elif ttype == '2':
-    print('haha not finished yet')
+    print('haha not finished ye')
 '''
 進度:
 英選中雛形完成(已可選)
