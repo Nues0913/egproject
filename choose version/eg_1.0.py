@@ -34,16 +34,19 @@ for i in range(len(voca)):
     test_voca[voca[i]] = chinese[i]
 #print(test_voca)
 
+os.system('cls')
 
 def intro():
     sys.stdout.write('loading')
+    sys.stdout.flush()
     for i in range(4):
         time.sleep(1)
         sys.stdout.write('.')
+        sys.stdout.flush()
     time.sleep(1)
     os.system('cls')
-    
-for i in range(3):
+
+for i in range(1):
     intro()
 
 os.system('cls')
