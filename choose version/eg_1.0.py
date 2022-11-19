@@ -59,10 +59,10 @@ def test_ganerator():
         t_type = typinput()
         if t_type == '1':
             t_number = int(input('input tests number\n'))
-            tem = [i for i in range(len(voca))]
+            tem = [i for i in range(len(voca))]     #做不重複random
             random.shuffle(tem)
             for i in range(t_number):
-                test.append(voca[tem[i]])  #做不重複random
+                test.append(voca[tem[i]])
             return t_type,test
         elif t_type == '2':
             t_number = int(input('input tests number\n'))
