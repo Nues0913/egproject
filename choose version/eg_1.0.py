@@ -3,10 +3,6 @@ import sys
 import time
 import random
 import openpyxl as op
-'''
-wb = op.Workbook()
-wb.save('test.xlsx')
-'''
 
 path = sys.path[0]
 path += '\en.xlsx'  #路徑引導
@@ -38,15 +34,19 @@ def intro():
         sys.stdout.flush()
     time.sleep(1)
     os.system('cls')
-'''
+
 for i in range(1):
     intro()
-'''
+
 voca,chinese = sheet_1()
 #print(voca,chinese)
 dict_voca = {}
 for i in range(len(voca)):
     dict_voca[voca[i]] = chinese[i]
+
+dict_chi = {}
+for k, v in dict_voca.items():
+    dict_chi[v] = k
 
 os.system('cls')
 
@@ -72,11 +72,15 @@ def test_ganerator():
                 test.append(chinese[tem[i]])
             return t_type,test
         else:
+            return 0,0
+    while True:
+        ttype,test = testadd()
+        if ttype == '1' or ttype == '2':
+            break
+        else:
             print('worng enter value,enter again')
             time.sleep(1)
             os.system('cls')
-            testadd()
-    ttype,test = testadd()
     return ttype,test
 
 ttype,test = test_ganerator()
@@ -90,7 +94,6 @@ random.shuffle(order)
 if ttype == '1':
     for i in range(len(test)):
         example = []
-        print(test[order[i]])
         for j in range(3):
             def temadd():
                 tem = chinese[random.randint(0,len(chinese)-1)]
@@ -101,25 +104,62 @@ if ttype == '1':
             temadd()
         example.append(dict_voca.get(test[order[i]]))
         random.shuffle(example)
-        for j in range(4):
-            print(j+1,example[j])
-        ans = int(input('ans:\n'))
+        while True:
+            print(test[order[i]])
+            for j in range(4):
+                print(j+1,example[j])
+            ans = input('ans:\n')
+            try:ans = int(ans)
+            except:pass
+            if type(ans) == int and ans <= 4 and ans >= 1:
+                break
+            else:
+                print('illegal input type')
+                time.sleep(1)
+                os.system('cls')
         if example[ans-1] == dict_voca.get(test[order[i]]):
             print('PASS')
         else:
-            print('Worng ans')
+            print('Worng answer')
         time.sleep(1)
         os.system('cls')
+
 elif ttype == '2':
-    print('haha not finished ye')
+    for i in range(len(test)):
+        example = []
+        for j in range(3):
+            def temadd():
+                tem = voca[random.randint(0,len(chinese)-1)]
+                if tem != dict_chi.get(test[order[i]]):
+                    example.append(tem)
+                else:
+                    temadd()
+            temadd()
+        example.append(dict_chi.get(test[order[i]]))
+        random.shuffle(example)
+        while True:
+            print(test[order[i]])
+            for j in range(4):
+                print(j+1,example[j])
+            ans = input('ans:\n')
+            try:ans = int(ans)
+            except:pass
+            if type(ans) == int and ans <= 4 and ans >= 1:
+                break
+            else:
+                print('illegal input type')
+                time.sleep(1)
+                os.system('cls')
+        if example[ans-1] == dict_chi.get(test[order[i]]):
+            print('PASS')
+        else:
+            print('Worng answer')
+        time.sleep(1)
+        os.system('cls')
 '''
 進度:
-英選中雛形完成(已可選)
+英選中v1.0完成(已可選)
 
 待辦:
-中選英功能
-錯誤回顧功能
-ans輸入形式錯誤防治
-抓蟲
 錯誤單字file output
 '''
