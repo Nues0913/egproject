@@ -9,8 +9,10 @@ path += '\en.xlsx'  #路徑引導
 #print(path)
 eg_data = op.load_workbook(path)
 #sheet name: 最近遇到 疑難雜症 lv3~4特選
-def sheet_1():
-    sheet1 = eg_data['疑難雜症']
+sheetdict = {'1':'最近遇到','2':'疑難雜症','3':'lv3~4特選'}
+
+def sheet_1(s):
+    sheet1 = eg_data[sheetdict.get(s)]
     voca_column = sheet1['A']
     voca = []
     for i in voca_column:
@@ -38,7 +40,18 @@ def intro():
 for i in range(1):
     intro()
 
-voca,chinese = sheet_1()
+while True:
+    print('choose sheet')
+    print('1 最近遇到 2 疑難雜症 3 lv3~4特選')
+    s = input()
+    if s == '1' or s == '2' or s == '3':
+        break
+    else:
+        print('wrong number')
+        time.sleep(1)
+        os.system('cls')
+        
+voca,chinese = sheet_1(s)
 #print(voca,chinese)
 dict_voca = {}
 for i in range(len(voca)):
@@ -55,6 +68,7 @@ def test_ganerator():
         a = (input('1 for voca trans chi,2 for chi trans voca\n'))
         return a
     def testadd():
+        print('avaliable problems :',len(voca))
         test = []
         t_type = typinput()
         if t_type == '1':
@@ -72,7 +86,7 @@ def test_ganerator():
                 test.append(chinese[tem[i]])
             return t_type,test
         else:
-            return 0,0
+            return 'wrong','wrong'
     while True:
         ttype,test = testadd()
         if ttype == '1' or ttype == '2':
@@ -81,6 +95,7 @@ def test_ganerator():
             print('worng enter value,enter again')
             time.sleep(1)
             os.system('cls')
+            
     return ttype,test
 
 ttype,test = test_ganerator()
@@ -89,6 +104,9 @@ print('test start')
 time.sleep(2)
 os.system('cls')
 
+yrchoose = []
+yrtest = []
+yrcorrectans = []
 order = [i for i in range(len(test))]
 random.shuffle(order)
 if ttype == '1':
@@ -105,7 +123,7 @@ if ttype == '1':
         example.append(dict_voca.get(test[order[i]]))
         random.shuffle(example)
         while True:
-            print(test[order[i]])
+            print(i+1,':',test[order[i]])
             for j in range(4):
                 print(j+1,example[j])
             ans = input('ans:\n')
@@ -121,9 +139,11 @@ if ttype == '1':
             print('PASS')
         else:
             print('Worng answer')
+            yrchoose.append(example[ans-1])
+            yrtest.append(test[order[i]])
+            yrcorrectans.append(dict_voca.get(test[order[i]]))
         time.sleep(1)
         os.system('cls')
-
 elif ttype == '2':
     for i in range(len(test)):
         example = []
@@ -138,7 +158,7 @@ elif ttype == '2':
         example.append(dict_chi.get(test[order[i]]))
         random.shuffle(example)
         while True:
-            print(test[order[i]])
+            print(i+1,':',test[order[i]])
             for j in range(4):
                 print(j+1,example[j])
             ans = input('ans:\n')
@@ -154,12 +174,15 @@ elif ttype == '2':
             print('PASS')
         else:
             print('Worng answer')
+            yrchoose.append(example[ans-1])
+            yrtest.append(test[order[i]])
+            yrcorrectans.append(dict_chi.get(test[order[i]]))
         time.sleep(1)
         os.system('cls')
-'''
-進度:
-英選中v1.0完成(已可選)
 
-待辦:
-錯誤單字file output
+for i in range(len(yrcorrectans)):
+    print('題目 : {0} ,你的選擇 : {1} , 正確答案 : {2}'.format(yrtest[i],yrchoose[i],yrcorrectans[i]))
+
+'''
+
 '''
