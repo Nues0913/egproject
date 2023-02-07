@@ -182,7 +182,3 @@ elif ttype == '2':
 
 for i in range(len(yrcorrectans)):
     print('題目 : {0} ,你的選擇 : {1} , 正確答案 : {2}'.format(yrtest[i],yrchoose[i],yrcorrectans[i]))
-
-'''
-
-'''
