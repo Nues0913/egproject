@@ -8,8 +8,8 @@ path = sys.path[0]
 path += '\en.xlsx'  #路徑引導
 #print(path)
 eg_data = op.load_workbook(path)
-#sheet name: 最近遇到 疑難雜症 lv3~4特選
-sheetdict = {'1':'最近遇到','2':'疑難雜症','3':'lv3~4特選'}
+#sheet name: 指考生字 疑難雜症 lv3~4特選 考前總匯
+sheetdict = {'1':'指考生字','2':'疑難雜症','3':'lv3~4特選','4':'考前總匯'}
 
 def sheet_1(s):
     sheet1 = eg_data[sheetdict.get(s)]
@@ -42,9 +42,9 @@ for i in range(1):
 
 while True:
     print('choose sheet')
-    print('1 最近遇到 2 疑難雜症 3 lv3~4特選')
+    print('1 指考生字 2 疑難雜症 3 lv3~4特選 4 考前總匯')
     s = input()
-    if s == '1' or s == '2' or s == '3':
+    if s == '1' or s == '2' or s == '3' or s == '4':
         break
     else:
         print('wrong number')
